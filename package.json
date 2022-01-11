@@ -1,0 +1,26 @@
+{
+  "name": "sdc",
+  "version": "1.0.0",
+  "description": "Product reviews API",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Magnificent-Macademia/Reviews-API.git"
+  },
+  "keywords": [
+    "Review's",
+    "API"
+  ],
+  "author": "Van Hsieh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Magnificent-Macademia/Reviews-API/issues"
+  },
+  "homepage": "https://github.com/Magnificent-Macademia/Reviews-API#readme",
+  "devDependencies": {
+    "mocha": "^9.1.3"
+  }
+}
