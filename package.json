@@ -28,6 +28,7 @@
     "mocha": "^9.1.3"
   },
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mongoose": "^6.1.6"
   }
 }

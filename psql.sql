@@ -1,5 +1,5 @@
 CREATE TABLE products (
-	product_id BIGSERIAL PRIMARY KEY,
+  product_id BIGSERIAL NOT NULL PRIMARY KEY,
   rating_1 INTEGER,
 	rating_2 INTEGER,
 	rating_3 INTEGER,
@@ -11,7 +11,7 @@ CREATE TABLE products (
 
 
 CREATE TABLE charcteristics (
-	characteristic_id BIGSERIAL PRIMARY KEY,
+	characteristic_id BIGSERIAL NOT NULL PRIMARY KEY,
 	count INTEGER,
 	total INTEGER,
 	description VARCHAR(50),
@@ -19,7 +19,7 @@ CREATE TABLE charcteristics (
 );
 
 CREATE TABLE reviews (
-  reviews_id BIGSERIAL PRIMARY KEY,
+  reviews_id BIGSERIAL NOT NULL PRIMARY KEY,
 	summary VARCHAR(50),
 	recommend BOOLEAN,
 	body TEXT,
