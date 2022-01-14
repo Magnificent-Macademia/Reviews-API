@@ -3,14 +3,7 @@ const mongoose = require('mongoose');
 const productsDoc = new mongoose.Schema({
   product: {
     productId: Number,
-    rating1: Number,
-    rating2: Number,
-    rating3: Number,
-    rating4: Number,
-    rating5: Number,
-    recommendTrue: Number,
-    recommendFalse: Number,
-    characteristic: [
+    characteristics: [
       {
         id: Number,
         count: Number,
@@ -18,12 +11,12 @@ const productsDoc = new mongoose.Schema({
         description: String,
       },
     ],
-    reviews: [Schema.Types.ObjectId],
+    reviews: [Number],
   },
 });
 
 const reviewsDoc = new mongoose.Schema({
-  _reviewId: Schema.Types.ObjectId,
+  _reviewId: Number,
   summary: String,
   recommend: Boolean,
   body: String,
