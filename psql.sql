@@ -19,7 +19,7 @@ CREATE TABLE reviews (
   reported BOOLEAN NOT NULL,
   rating SMALLINT NOT NULL,
   response VARCHAR(2000),
-  product_id INTEGER
+  product_id INTEGER NOT NULL
 );
 
 
@@ -39,5 +39,5 @@ CREATE TABLE photos (
 CREATE TABLE characteristics (
   characteristic_id BIGSERIAL UNIQUE NOT NULL PRIMARY KEY,
   name VARCHAR(50),
-  product_id INTEGER
+  product_id INTEGER NOT NULL
 );
