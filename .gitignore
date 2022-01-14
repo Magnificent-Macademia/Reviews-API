@@ -106,3 +106,7 @@ dist
 
 # Eslint
 .eslintrc
+
+
+# Sketch files
+mongoSchema.js
