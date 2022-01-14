@@ -1,4 +1,5 @@
 const express = require('express');
+const controller = require('./controller');
 
 const app = express();
 const port = 3000;
@@ -11,10 +12,7 @@ app.use(express.json());
 // sort (text, "newest", "helpful", or "relevant")
 // product_id (integer)
 app.get('/reviews', (req, res) => {
-  const params = req.query;
-  const queryStr = Object.keys(params).map((key) => `${key}=${params[key]}`).join('&');
-
-  res.send(queryStr);
+  controller.getReviews(req, res);
 });
 
 // Returns review metadata for a given product with query paremeters:
