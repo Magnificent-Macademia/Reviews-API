@@ -15,7 +15,16 @@ module.exports = {
   },
   postReview: (req, cb) => {
     const date = Date.now();
-    const { email, name, summary, body, recommend, rating, characteristics, photos} = req.body;
+    const {
+      email,
+      name,
+      summary,
+      body,
+      recommend,
+      rating,
+      characteristics,
+      photos,
+    } = req.body;
     const productId = req.body.product_id;
     const reviewInsertStr = `insert into reviews(email, name, summary, body, date, recommend, rating, product_id, helpfulness, reported) values ('${email}', '${name}', '${summary}', '${body}', ${date}, '${recommend}', ${rating}, ${productId}, 0, 'f')`;
     const photosStr = photos.map((url) => `(SELECT '${url}', review_id FROM ins1)`).join(' UNION ');

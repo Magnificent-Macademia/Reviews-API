@@ -6,17 +6,10 @@ const port = 3000;
 
 app.use(express.json());
 
-// returns list of reviews for a particular product with query paremeters:
-// page (integer, default 1)
-// count (integer, default 5)
-// sort (text, "newest", "helpful", or "relevant")
-// product_id (integer)
 app.get('/reviews', (req, res) => {
   controller.getReviews(req, res);
 });
 
-// Returns review metadata for a given product with query paremeters:
-// product_id (integer)
 app.get('/reviews/meta', (req, res) => {
   const params = req.query;
   const queryStr = Object.keys(params).map((key) => `${key}=${params[key]}`).join('&');
@@ -24,20 +17,6 @@ app.get('/reviews/meta', (req, res) => {
   res.send(queryStr);
 });
 
-// adds a review for the given product
-/*
-request body sample
-{
-    "product_id": 63609,
-    "rating": 5,
-    "summary": "Great Product",
-    "body": "frad gthtwhr fahyaterf gtagf",
-    "recommend": true,
-    "name": "tester",
-    "email": "tester@gmail.com",
-    "characteristics": {}
-  }
-*/
 app.post('/reviews', (req, res) => {
   controller.postReview(req, res);
 });
