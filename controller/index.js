@@ -20,7 +20,7 @@ module.exports = {
       res.status(400).send('Invalid sort method, please choose between newest, helpful, or relevant');
     }
 
-    model.getReviews(params, (err, results) => {
+    model.getReviews(params, (err, data) => {
       if (err) {
         res.status(400).send(err);
       } else {
@@ -28,7 +28,7 @@ module.exports = {
           product: params.product_id,
           page: 0,
           count: params.count,
-          results: results.rows,
+          results: data.rows,
         };
         res.json(responseObj);
       }
@@ -53,7 +53,12 @@ request body sample
 */
 
   postReview: (req, res) => {
-    console.log('controller postReviews', req);
-    res.send('hi');
+    model.postReview(req, (err) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(201).send('Created');
+      }
+    });
   },
 };
