@@ -31,23 +31,6 @@ module.exports = {
     }
   },
 
-  /*
-request body sample
-{
-  product_id (int) [required]
-  rating (int) [options 1-5]
-  summary (str)
-  body (str)
-  recommend (bool)
-  name (str)
-  email (str)
-  photos (str)
-  characteristics (obj) { "14": 5, "15": 5 //...}
-}
-
-  res.json(req.body);
-*/
-
   postReview: (req, res) => {
     if (req.body.product_id === undefined || typeof (req.body.product_id) !== 'number') {
       res.status(400).send('Invalid product_id input');
@@ -71,6 +54,85 @@ request body sample
           res.status(201).send('Created');
         }
       });
+    }
+  },
+
+  getMeta: (req, res) => {
+    const productId = parseInt(req.query.product_id, 10);
+
+    if (req.query.product_id === undefined || typeof productId !== 'number') {
+      res.status(400).send('Invalid product_id input');
+    } else {
+      const ratingsPromise = new Promise((resolve, reject) => {
+        model.getRatings(productId, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(data);
+          }
+        });
+      });
+
+      const recommendPromise = new Promise((resolve, reject) => {
+        model.getRecommend(productId, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(data);
+          }
+        });
+      });
+
+      const characteristicsPromise = new Promise((resolve, reject) => {
+        model.getCharacteristics(productId, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(data);
+          }
+        });
+      });
+
+      Promise.all([ratingsPromise, recommendPromise, characteristicsPromise])
+        .then((values) => {
+          const ratingsObj = {};
+          values[0].rows.forEach((ratingCount) => {
+            ratingsObj[ratingCount.rating.toString()] = ratingCount.count.toString();
+          });
+          const recObj = {};
+          values[1].rows.forEach((recommendedCount) => {
+            recObj[recommendedCount.recommend.toString()] = recommendedCount.count.toString();
+          });
+          const charTempObj = {};
+          // console.log(values[2].rows);
+          values[2].rows.forEach((char) => {
+            const { name } = char;
+            const joinId = char.join_id;
+            const { value } = char;
+            if (charTempObj[name]) {
+              charTempObj[name].count += 1;
+              charTempObj[name].total += value;
+            } else {
+              charTempObj[name] = { id: joinId, count: 1, total: value };
+            }
+          });
+          const charObj = {};
+          Object.keys(charTempObj).forEach((key) => {
+            const eachChar = charTempObj[key];
+            charObj[key] = { id: charTempObj.joinId, value: eachChar.total / eachChar.count };
+          });
+
+          const responseObj = {
+            product_id: req.query.product_id,
+            ratings: ratingsObj,
+            recommended: recObj,
+            characteristics: charObj,
+          };
+          res.json(responseObj);
+        })
+        .catch((err) => {
+          res.status(400).send(err);
+        });
     }
   },
 };

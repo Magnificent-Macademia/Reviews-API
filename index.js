@@ -11,10 +11,7 @@ app.get('/reviews', (req, res) => {
 });
 
 app.get('/reviews/meta', (req, res) => {
-  const params = req.query;
-  const queryStr = Object.keys(params).map((key) => `${key}=${params[key]}`).join('&');
-
-  res.send(queryStr);
+  controller.getMeta(req, res);
 });
 
 app.post('/reviews', (req, res) => {

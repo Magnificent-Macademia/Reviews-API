@@ -61,4 +61,22 @@ module.exports = {
       cb(err);
     });
   },
+  getRatings: (productId, cb) => {
+    const queryStr = `select rating, count(*) from reviews where product_id=${productId} group by rating order by rating ASC;`;
+    db.query(queryStr, (err, data) => {
+      cb(err, data);
+    });
+  },
+  getRecommend: (productId, cb) => {
+    const queryStr = `select recommend, count(*) from reviews where product_id=${productId} group by recommend;`;
+    db.query(queryStr, (err, data) => {
+      cb(err, data);
+    });
+  },
+  getCharacteristics: (productId, cb) => {
+    const queryStr = `select characteristics.characteristic_id, characteristics.name, characteristics_reviews.join_id, characteristics_reviews.characteristic_id, characteristics_reviews.value from characteristics, characteristics_reviews where characteristics.product_id=${productId} AND characteristics.characteristic_id=characteristics_reviews.characteristic_id group by characteristics.characteristic_id, characteristics_reviews.join_id;`;
+    db.query(queryStr, (err, data) => {
+      cb(err, data);
+    });
+  },
 };
