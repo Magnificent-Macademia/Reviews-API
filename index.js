@@ -38,10 +38,8 @@ request body sample
     "characteristics": {}
   }
 */
-app.post('/', (req, res) => {
-  console.log(req.body);
-
-  res.json(req.body);
+app.post('/reviews', (req, res) => {
+  controller.postReview(req, res);
 });
 
 // Updates a review to show it was found helpful.
