@@ -79,4 +79,19 @@ module.exports = {
       cb(err, data);
     });
   },
+  putHelpful: (reviewId, cb) => {
+    const queryStr = `update reviews set helpfulness=helpfulness+1 where review_id=${reviewId};`;
+
+    db.query(queryStr, (err) => {
+      cb(err);
+    });
+  },
+
+  putReport: (reviewId, cb) => {
+    const queryStr = `update reviews set reported='t' where review_id=${reviewId};`;
+
+    db.query(queryStr, (err) => {
+      cb(err);
+    });
+  },
 };

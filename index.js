@@ -18,18 +18,13 @@ app.post('/reviews', (req, res) => {
   controller.postReview(req, res);
 });
 
-// Updates a review to show it was found helpful.
-app.put('/:review_id/helpful', (req, res) => {
-  const reviewId = req.params.review_id;
-
-  res.send(`${reviewId} is helpful`);
+app.put('/reviews/:review_id/helpful', (req, res) => {
+  controller.putHelpful(req, res);
 });
 
 // Updates a review to mark as reported
-app.put('/:review_id/report', (req, res) => {
-  const reviewId = req.params.review_id;
-
-  res.send(`${reviewId} is reported`);
+app.put('/reviews/:review_id/report', (req, res) => {
+  controller.putReport(req, res);
 });
 
 app.listen(port, () => {

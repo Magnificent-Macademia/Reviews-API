@@ -135,4 +135,36 @@ module.exports = {
         });
     }
   },
+
+  putHelpful: (req, res) => {
+    const reviewId = parseInt(req.params.review_id, 10);
+
+    if (req.params.review_id === undefined || typeof reviewId !== 'number') {
+      res.status(400).send('Invalid review_id input');
+    } else {
+      model.putHelpful(reviewId, (err) => {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.status(204).send('updated');
+        }
+      });
+    }
+  },
+
+  putReport: (req, res) => {
+    const reviewId = parseInt(req.params.review_id, 10);
+
+    if (req.params.review_id === undefined || typeof reviewId !== 'number') {
+      res.status(400).send('Invalid review_id input');
+    } else {
+      model.putReport(reviewId, (err) => {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.status(204).send('updated');
+        }
+      });
+    }
+  },
 };
