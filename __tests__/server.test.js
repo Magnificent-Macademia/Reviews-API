@@ -45,8 +45,27 @@ describe('GET /reviews', () => {
     expect(response.body.results.length).toBeLessThanOrEqual(2);
   });
 
-  test('Result should have review id rating, summary, recommend, response, bodym date, review_name', async () => {
+  test('Result should have rating, summary, recommend, response, bodym date, review_name', async () => {
     const response = await request(app).get('/reviews?product_id=2&count=2');
-    expect(parseInt(response.body.count, 10)).toBeLessThanOrEqual(2);
+    expect(response.body.results).toBeInstanceOf(Array);
+    expect(response.body.results[0]).toBeInstanceOf(Object);
+    expect(response.body.results[0].name).toBe('shortandsweeet');
+    expect(response.body.results[0].email).toBe('first.last@gmail.com');
+    expect(response.body.results[0].date).toBe('2021-02-T06:28:37:620Z');
+    expect(response.body.results[0].photos).toBeInstanceOf(Array);
   });
 });
+
+// describe('POST /reviews', () => {
+//   test('It should respond with 201 status code for valid request', async () => {
+//     const response = await request(app).post('/reviews?product_id=2');
+//     expect(response.body).toBeInstanceOf(Object);
+//     expect(response.statusCode).toBe(201);
+//   });
+
+//   test('It should get a 400 status code when request does not have product_id', async () => {
+//     const response = await request(app).post('/reviews');
+//     expect(response.statusCode).toBe(400);
+//     expect(response.text).toBe('Invalid product_id input');
+//   });
+// });

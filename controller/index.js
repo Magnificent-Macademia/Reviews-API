@@ -32,18 +32,6 @@ module.exports = {
             record.date = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}T${hour < 10 ? '0' : ''}${hour}:${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}:${ms < 10 ? '0' : ''}${ms}Z`;
           });
 
-          data.rows.forEach((record) => {
-            const unix = parseInt(record.date, 10);
-            const date = new Date(unix);
-            const year = date.getFullYear();
-            const month = date.getMonth();
-            const day = date.getDate();
-            const hour = date.getHours();
-            const min = date.getMinutes();
-            const sec = date.getSeconds();
-            const ms = date.getMilliseconds();
-            record.date = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}T${hour < 10 ? '0' : ''}${hour}:${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}:${ms < 10 ? '0' : ''}${ms}Z`;
-          });
           const responseObj = {
             product: params.product_id,
             page: 0,
