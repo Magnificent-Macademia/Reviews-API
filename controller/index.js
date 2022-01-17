@@ -6,8 +6,8 @@ module.exports = {
 
     if (params.product_id === undefined) {
       res.status(400).send('Missing product_id. Product_id is necessary for looking up reviews');
-    } else if (params.sort !== undefined && !(params.sort in ['newest', 'helpful', 'relevant'])) {
-      res.status(400).send('Invalid sort method, please choose between newest, helpful, or relevant');
+    } else if (params.sort !== undefined && !['newest', 'helpful', 'relevant'].includes(params.sort)) {
+      res.status(400).send('Invalid sort method, please enter newest, helpful, or relevant');
     } else {
       if (params.page === undefined) {
         params.page = 1;
@@ -29,7 +29,7 @@ module.exports = {
             const min = date.getMinutes();
             const sec = date.getSeconds();
             const ms = date.getMilliseconds();
-            record.date = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}T${hour < 10 ? '0' : ''}${hour}:${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}:${ms < 10 ? '0' : ''}${ms}Z`;
+            record.date = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}T${hour < 10 ? '0' : ''}${hour}:${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}:${ms < 10 ? '0' : ''}${ms}Z`;
           });
 
           const responseObj = {
