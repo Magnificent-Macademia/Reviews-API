@@ -218,3 +218,21 @@ describe('GET /reviews/meta?product_id=2', () => {
     expect(response.body.characteristics.Size.value).toBe(3);
   });
 });
+
+describe('PUT /reviews/:review_id/helpful', () => {
+  test('It should respond with 204 status code for valid request', async () => {
+    const response = await request(app).put('/reviews/2/helpful');
+    const data = await db.query('select helpfulness from reviews where review_id=2;');
+    expect(response.statusCode).toBe(204);
+    expect(data.rows[0].helpfulness).toBe(1);
+  });
+});
+
+describe('PUT /reviews/:review_id/report', () => {
+  test('It should respond with 204 status code for valid request', async () => {
+    const response = await request(app).put('/reviews/2/report');
+    const data = await db.query('select reported from reviews where review_id=2;');
+    expect(response.statusCode).toBe(204);
+    expect(data.rows[0].reported).toBe(true);
+  });
+});
