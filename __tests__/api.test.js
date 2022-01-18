@@ -180,7 +180,6 @@ describe('POST /reviews', () => {
     expect(response.text).toBe('Invalid product_id input');
   });
 
-
   test('New record should be added to reviews, characteristics_reviews, and photos tables', async () => {
     const reviewsData = await db.query('select * from reviews;');
     const chrRevData = await db.query('select * from characteristics_reviews;');
