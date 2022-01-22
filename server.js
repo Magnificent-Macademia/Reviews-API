@@ -1,9 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const controller = require('./controller');
 
 const app = express();
 
 app.use(express.json());
+
+app.get('loaderio-0bdb4f2adc2a60f4f39e88523bf63ea2.txt', (req, res) => {
+  res.send('loaderio-0bdb4f2adc2a60f4f39e88523bf63ea2');
+});
 
 app.get('/reviews', (req, res) => {
   controller.getReviews(req, res);
