@@ -110,3 +110,9 @@ dist
 
 # Sketch files
 mongoSchema.js
+
+# database
+reviewsapi.sql
+
+#newrelic.js
+newrelic.js
