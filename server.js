@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 app.get('/loaderio-0bdb4f2adc2a60f4f39e88523bf63ea2.txt', (req, res) => {
-  res.send('loaderio-0bdb4f2adc2a60f4f39e88523bf63ea2');
+  res.sendFile('/Users/vanhsieh/Desktop/Hack Reactor/SDC/loaderio-0bdb4f2adc2a60f4f39e88523bf63ea2.txt');
 });
 
 app.get('/reviews', (req, res) => {
