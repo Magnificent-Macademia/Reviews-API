@@ -1,10 +1,10 @@
 # Reviews-API
 
+This is an API to support Ecommerce client to peform CRUD operations on reviews data. In this project, we are using Express as our server linking to PostgreSQL using pooling.
+
 [API Documentation](#api-documentation)
 
 [Set up](#set-up)
-
-This is an API to support Ecommerce client to peform CRUD operations on reviews data. In this project, we are using Express as our server linking to PostgreSQL using pooling.
 
 ## API Documentation
 ### GET /reviews/
